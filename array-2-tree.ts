@@ -11,16 +11,15 @@ interface TreeNode {
 function array2Tree(array: TreeNode[]): TreeNode[] {
     const tree: TreeNode[] = []
     const map = new Map()
-    // 先循环构建map
-    for (const item of array) {
-        item.children = []
-        map.set(item.id, item)
+    for (const i of array) {
+        map.set(i.id, i)
     }
-    // 再构建树
-    for (const item of array) {
-        if (item.pid !== 0)
-            map.get(item.pid).children.push(item)
-        else tree.push(item)
+    for (const i of array) {
+        if (i.pid !== 0) {
+            map.get(i.pid).children = i
+        } else {
+            tree.push(i)
+        }
     }
     return tree
 }
